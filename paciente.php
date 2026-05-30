@@ -46,8 +46,8 @@ while($fila = mysqli_fetch_assoc($resultado)){
         <td class="border border-gray-300 px-6 py-3"><?php echo $fila["Direccion"]; ?></td>
         <td class="border border-gray-300 px-6 py-3"><?php echo $fila["Ciudad"]; ?></td>
         <td class="border border-gray-300 px-6 py-3 text-center"><?php echo $fila["Fecha_nacimiento"]; ?></td>
-        <td class="border border-gray-300 px-6 py-3 text-center"><a href="editar_Paciente.php?id=<?php echo $fila['ID_Paciente']; ?>" class="text-blue-500 hover:text-blue-700">Editar</a></td>
-        <td class="border border-gray-300 px-6 py-3"><a href="eliminar.php?id=<?php echo $fila['ID_Paciente']; ?>" class="text-red-500 hover:text-red-700">Eliminar</a></td>
+        <td class="border border-gray-300 px-6 py-3 text-center"><a href="editar_Paciente.php?ID_Paciente=<?php echo $fila['ID_Paciente']; ?>" class="text-blue-500 hover:text-blue-700">Editar</a></td>
+        <td class="border border-gray-300 px-6 py-3"><a href="eliminar.php?ID_Paciente=<?php echo $fila['ID_Paciente']; ?>" class="text-red-500 hover:text-red-700">Eliminar</a></td>
     <?php
     echo $fila["Nombre"];  } ?>
 
