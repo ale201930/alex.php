@@ -11,6 +11,12 @@ require_once "conex.php";
 </head>
 <body class="bg-gray-100 min-h-screen p-4 sm:p-8">
 
+ <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado'): ?>
+    <div class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded">
+        Paciente eliminado exitosamente.
+    </div>
+ <?php endif; ?>
+
     <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
         
         <div class="bg-slate-800 px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
