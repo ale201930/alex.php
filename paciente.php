@@ -12,8 +12,14 @@ require_once "conex.php";
 <body class="bg-gray-100 min-h-screen p-4 sm:p-8">
 
  <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado'): ?>
-    <div class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded">
+    <div class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded shadow-sm">
         Paciente eliminado exitosamente.
+    </div>
+ <?php endif; ?>
+
+ <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'agregado'): ?>
+    <div class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded shadow-sm">
+        Paciente registrado exitosamente.
     </div>
  <?php endif; ?>
 
@@ -27,6 +33,12 @@ require_once "conex.php";
                 <p class="text-slate-400 text-sm mt-0.5">Listado general de registros médicos en el sistema</p>
             </div>
             
+            <div>
+                <a href="agregar_paciente.php" 
+                   class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all duration-150 hover:shadow-emerald-900/20 tracking-wide">
+                    ➕ Agregar Paciente
+                </a>
+            </div>
         </div>
 
         <?php
@@ -54,7 +66,6 @@ require_once "conex.php";
                     
                     <tbody class="divide-y divide-gray-200 text-sm text-gray-600">
                     <?php
-                    // Contador para alternar colores de fila si lo deseas, o usar el zebra de tailwind
                     while($fila = mysqli_fetch_assoc($resultado)){
                     ?>
                         <tr class="hover:bg-slate-50/80 transition-colors duration-150 odd:bg-white even:bg-slate-50/40">

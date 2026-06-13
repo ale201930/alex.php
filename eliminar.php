@@ -1,40 +1,44 @@
 <?php
 require_once "conex.php";
 
-// 2. Verificar que los datos hayan sido enviados por el método POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// 1. Cambiamos a GET porque el ID viaja por la URL desde el enlace
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
-    // 3. Capturar y limpiar los datos del formulario
-    $id               = isset($_POST['id']) ? trim($_POST['id']) : null;
-    if (empty($id)) {
+    // 2. Capturamos 'ID_Paciente' (que es el nombre que usas en el enlace de la tabla)
+    $id = isset($_GET['ID_Paciente']) ? trim($_GET['ID_Paciente']) : null;
+    
+    // 3. CORRECCIÓN: Si el ID NO está vacío, procedemos a borrar
+    if (!empty($id)) {
         
-    
-    $sql = "DELETE FROM paciente WHERE ID_Paciente = ?";
+        $sql = "DELETE FROM paciente WHERE ID_Paciente = ?";
 
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("i", $id);
-        
-        if ($stmt->execute()) {
+        if ($stmt = $conn->prepare($sql)) {
+            // "i" asume que tu ID_Paciente es un entero. Si es texto (ej. una cédula), cámbialo por "s"
+            $stmt->bind_param("i", $id); 
+            
+            if ($stmt->execute()) {
+                $stmt->close();
+                $conn->close();
+                // Redirigimos pasando el parámetro 'eliminado' para que tu alerta en paciente.php lo reconozca
+                header("Location: paciente.php?mensaje=eliminado");
+                exit;
+            } else {
+                echo "Error al eliminar el paciente: " . $stmt->error;
+            }
+            
             $stmt->close();
-            $conn->close();
-            header("Location: paciente.php?mensaje=Paciente eliminado exitosamente");
-            exit;
         } else {
-            echo "Error al eliminar el paciente: " . $stmt->error;
+            echo "Error al preparar la consulta: " . $conn->error;
         }
-        
-        $stmt->close();
-    } else {
-        echo "Error al preparar la consulta: " . $conn->error;
-    }
 
     } else {
-        echo "Error: ID paciente no valido o vacio .";
+        echo "Error: ID de paciente no válido o vacío.";
     }
+    
     $conn->close();
 } else {
+    // Si intentan entrar de otra forma, directo al listado
     header("Location: paciente.php");
     exit();
 }
-
 ?>
