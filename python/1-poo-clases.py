@@ -76,4 +76,5 @@ mi_seleccion = Futbol(
 mi_seleccion.mostrar_seleccion()
 mi_seleccion.mostrar_copa()
 mi_seleccion.mostrar_ganador()
+
         
