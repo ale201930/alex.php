@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>{{ titulo }}</h1>
-    {% if paciente %}
+    {% if medico %}
     <table>
         <thead>
             <tr>
@@ -25,19 +25,19 @@
             </tr>
         </thead>
         <tbody>
-            {% for p in paciente %}
+            {% for m in medico %}
             <tr>
-                <td>{{ p[0] }}</td> 
-                <td>{{ p[1] }}</td>
-                <td>{{ p[2] }}</td>
-                <td>{{ p[4] }}</td>
-                <td>{{ p[7] }}</td>
+                <td>{{ m[0] }}</td> 
+                <td>{{ m[1] }}</td>
+                <td>{{ m[2] }}</td>
+                <td>{{ m[4] }}</td>
+                <td>{{ m[7] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-    <p>No se encontró información del paciente.</p>
+    <p>No se encontró información del médico.</p>
     {% endif %}
 </body>
 </html>

@@ -17,7 +17,7 @@ def leer_registros():
     try:
         # aqui se usa el cursor para ejecutar la consulta
         cursor = conexion.cursor()
-        cursor.execute("SELECT * FROM paciente")
+        cursor.execute("SELECT * FROM medico")
         resultados = cursor.fetchall()
         
     except mysql.connector.Error as error:
@@ -34,15 +34,15 @@ def leer_registros():
 # --- ruta principal de flask (renderizado) ---
 @app.route("/")
 
-def listar_paciente():
+def listar_medico():
     # 1. obtener datos de la base datos
-    datos_paciente = leer_registros()
+    datos_medico = leer_registros()
     
     # 2. renderizar la plantilla html, pasandole los datos
     return render_template(
-        "paciente.html",
-        paciente=datos_paciente,
-        titulo="lista de paciente"
+        "medico.html",
+        medico=datos_medico,
+        titulo="lista de médicos"
     )
 # --- Inicio del servidor
 if __name__ == "__main__":
